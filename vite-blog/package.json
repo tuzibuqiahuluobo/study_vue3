@@ -10,15 +10,20 @@
     "json:server": "json-server --watch data//db.json --port 3004"
   },
   "dependencies": {
-    "axios": "^1.3.5",
+    "@element-plus/icons-vue": "^2.1.0",
+    "axios": "^1.4.0",
+    "element-plus": "^2.3.5",
     "json-server": "^0.17.3",
     "sass": "^1.62.1",
     "sass-loader": "^13.2.2",
     "vue": "^3.2.47",
+    "vue-axios": "^3.5.2",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
+    "unplugin-auto-import": "^0.16.0",
+    "unplugin-vue-components": "^0.24.1",
     "vite": "^4.2.0"
   },
   "description": "This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.",

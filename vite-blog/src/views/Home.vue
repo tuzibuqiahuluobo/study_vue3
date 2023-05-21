@@ -3,7 +3,7 @@ import PostList from "../components/PostList.vue";
 import getPosts from "../composibles/getPosts";
 import Spinner from "../components/Spinner.vue";
 import TagCloud from "../components/TagCloud.vue";
-import MusicPlayer from "../components/MusicPlayer.vue";
+
 
 const { posts, load } = getPosts();
 load();

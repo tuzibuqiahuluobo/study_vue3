@@ -4,7 +4,6 @@ import Index from "./views/index/Index.vue";
 </script>
 
 <template>
-  <!-- <Navbar /> -->
   <div>
     <router-view> </router-view>
   </div>

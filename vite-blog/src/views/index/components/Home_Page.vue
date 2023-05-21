@@ -1,4 +1,8 @@
-<script></script>
+<script setup>
+import Avatar from "../../../components/Avatar.vue";
+
+
+</script>
 
 <template>
   <div>
@@ -40,7 +44,9 @@
         <div class="content">Content</div>
       </div>
       <div class="content_right">
-        <div class="content_util" style="height: 180px">avatar</div>
+           <router-link to="/Login">
+             <Avatar style="height: 180px"/>
+           </router-link>
         <div class="content_util" style="height: 270px">comments</div>
         <div class="content_util" style="height: 180px">donation</div>
         <div class="content_util" style="height: 220px">recommend</div>
