@@ -17,10 +17,12 @@ import Login from "../views/index/components/Login.vue";
 .router-link-active {
   text-decoration: none;
   width: 100px;
+  background-color: blue;
 }
 a {
   text-decoration: none;
   width: 100px;
+  background-color: red;
 }
 
 </style>
