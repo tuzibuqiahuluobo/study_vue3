@@ -5,6 +5,7 @@ import Home_Page from "./components/Home_Page.vue";
 <template>
     <div>
         <Home_Page />
+        <router-view/>
     </div>
 </template>
 

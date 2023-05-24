@@ -4,8 +4,8 @@ import Index from "./views/index/Index.vue";
 </script>
 
 <template>
-  <div>
-    <router-view> </router-view>
+  <div id="app">
+    <router-view/>
   </div>
 </template>
 

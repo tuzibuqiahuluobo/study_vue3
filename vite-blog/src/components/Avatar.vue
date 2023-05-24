@@ -1,16 +1,35 @@
 <script setup>
 import Login from "../views/index/components/Login.vue";
+import {useRouter} from "vue-router";
+//
+import { reactive, toRefs } from 'vue'
+const state = reactive({
+    circleUrl:
+        'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+
+})
+const { circleUrl, } = toRefs(state)
+//
+
+const router = useRouter()
+const toViews = () => {
+    router.push({
+        path:"/Login"
+    });
+}
+
 </script>
 
 <template>
-  <div class="Avatar">
-        <router-link to="/Login">头像</router-link>
-  </div>
+    <div>
+        <el-avatar :size="'large'" :src="circleUrl" @click="toViews" />
+    </div>
 </template>
 
 <style lang="scss">
+
 .Avatar{
-    width: 300px;
+    width: 100px;
     height: 100px;
   background-color: white;
 }

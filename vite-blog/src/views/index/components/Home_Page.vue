@@ -44,9 +44,11 @@ import Avatar from "../../../components/Avatar.vue";
         <div class="content">Content</div>
       </div>
       <div class="content_right">
-           <router-link to="/Login">
-             <Avatar style="height: 180px"/>
-           </router-link>
+        <div class="content_util" style="height: 180px;">
+            <router-view>
+                 <Avatar class="content_avatar"/>
+            </router-view>
+        </div>
         <div class="content_util" style="height: 270px">comments</div>
         <div class="content_util" style="height: 180px">donation</div>
         <div class="content_util" style="height: 220px">recommend</div>
@@ -90,6 +92,12 @@ import Avatar from "../../../components/Avatar.vue";
     padding-right: 20px;
     border: red solid 1px;
   }
+  &_avatar{
+    border: yellow solid 1px;
+    border-radius: 100% 100%  100% 100%;
+    background-color: red;
+    width: 100px;
+  }
 }
 
 .content {
@@ -112,12 +120,14 @@ import Avatar from "../../../components/Avatar.vue";
     top: 7%;
     width: 20%;
     height: 910px;
-    background-color: black;
+    background-color: yellow;
   }
 
   &_util {
     margin-bottom: 20px;
     background-color: wheat;
+    display: flex;
+    justify-content: center;
     &:last-child {
       margin-bottom: 0;
     }
