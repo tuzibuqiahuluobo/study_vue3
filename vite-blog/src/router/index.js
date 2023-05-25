@@ -22,14 +22,19 @@ const router = createRouter({
             path: "/",
             name: "Index",
             component: ()=>import('../views/index/Index.vue') ,
-            children:[
-                {
-                    path :"",
-                    name:"index_login",
-                    component:()=>import('../views/index/components/Login.vue')
-                }
-            ]
+            // children:[
+            //     {
+            //         path :"/Login",
+            //         name:"index_login",
+            //         component:()=>import('../views/index/components/Login.vue')
+            //     }
+            // ]
         },
+        {
+            path:"/Login",
+            name:"Login",
+            component:()=>import('../views/index/components/Login.vue')
+        }
     ]
 })
 

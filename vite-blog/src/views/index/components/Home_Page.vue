@@ -1,20 +1,35 @@
 <script setup>
 import Avatar from "../../../components/Avatar.vue";
-
-
 </script>
 
 <template>
   <div>
     <div class="header">
       <div class="header_nav" style="color: #fff">
-        <div class="header_navItem">nav1</div>
-        <div class="header_navItem">nav2</div>
-        <div class="header_navItem">nav3</div>
-        <div class="header_navItem">nav4</div>
-        <div class="header_navItem">nav5</div>
-        <div class="header_navItem">nav6</div>
-        <div class="header_navItem">nav7</div>
+        <el-menu
+          :default-active="activeIndex"
+          
+          class="el-menu-demo"
+          mode="horizontal"
+          @select="handleSelect"
+          
+        >
+          <el-menu-item index="1">Processing Center</el-menu-item>
+          <el-sub-menu index="2">
+            <template #title>nav1</template>
+            <el-menu-item index="2-1">item one</el-menu-item>
+            <el-menu-item index="2-2">item two</el-menu-item>
+            <el-menu-item index="2-3">item three</el-menu-item>
+            <el-sub-menu index="2-4">
+              <template #title>item four</template>
+              <el-menu-item index="2-4-1">item one</el-menu-item>
+              <el-menu-item index="2-4-2">item two</el-menu-item>
+              <el-menu-item index="2-4-3">item three</el-menu-item>
+            </el-sub-menu>
+          </el-sub-menu>
+          <el-menu-item index="3" disabled>Info</el-menu-item>
+          <el-menu-item index="4">Orders</el-menu-item>
+        </el-menu>
       </div>
       <div class="header_title">
         <div
@@ -41,13 +56,13 @@ import Avatar from "../../../components/Avatar.vue";
     </div>
     <div class="content">
       <div class="content_left">
-        <div class="content">Content</div>
+        <div class="content1">Content1</div>
       </div>
       <div class="content_right">
-        <div class="content_util" style="height: 180px;">
-            <router-view>
-                 <Avatar class="content_avatar"/>
-            </router-view>
+        <div class="content_util" style="height: 180px">
+          <router-view>
+            <Avatar />
+          </router-view>
         </div>
         <div class="content_util" style="height: 270px">comments</div>
         <div class="content_util" style="height: 180px">donation</div>
@@ -91,12 +106,6 @@ import Avatar from "../../../components/Avatar.vue";
     padding-top: 5px;
     padding-right: 20px;
     border: red solid 1px;
-  }
-  &_avatar{
-    border: yellow solid 1px;
-    border-radius: 100% 100%  100% 100%;
-    background-color: red;
-    width: 100px;
   }
 }
 
