@@ -6,6 +6,8 @@
 打开Windows Power Shell(管理员),输入该命令:set-ExecutionPolicy RemoteSigned
 然后输入A，关闭窗口即可
 
+* 相关文件下载，国内源 https://wwqn.lanzoul.com/b03kap6pa 密码:1hg8
+
 # 运行项目,cd到该项目目录,yarn构建,再yarn dev运行项目
 
 ## 前后端分离项目模板
