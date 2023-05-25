@@ -18,3 +18,7 @@
 * 注册用户（通过邮箱注册）
 * 重置密码（通过邮箱重置密码）
 
+
+
+##注意##
+* 遇到“OpenSSL SSL_read: Connection was reset, errno 10054”问题时在最外层的目录的终端中输入 git config --global http.sslVerify "false"
