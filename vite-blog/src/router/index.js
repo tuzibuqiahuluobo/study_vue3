@@ -1,10 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Details from '../views/Details.vue'
-import Create from '../views/Create.vue'
-import Tag from '../views/Tag.vue'
-import Index from '../views/index/Index.vue'
-import Login from "../views/index/components/Login.vue";
 
 
 // const routes = [
@@ -33,7 +28,12 @@ const router = createRouter({
         {
             path:"/Login",
             name:"Login",
-            component:()=>import('../views/index/components/Login.vue')
+            component:()=>import('../views/login/Login.vue')
+        },
+        {
+            path:"/Sign_out",
+            name:"sign_out",
+            component:()=>import('../views/login/components/Sign_out.vue')
         }
     ]
 })

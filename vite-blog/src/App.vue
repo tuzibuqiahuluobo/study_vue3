@@ -1,6 +1,5 @@
 <script setup>
-import Navbar from "./components/Navbar.vue";
-import Index from "./views/index/Index.vue";
+import Login from './views/login/Login.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-import Login from "../views/index/components/Login.vue";
+import Login from "../views/login/Login.vue";
 import {useRouter} from "vue-router";
 //
 import { reactive, toRefs } from 'vue'

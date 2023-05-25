@@ -48,10 +48,23 @@ public class SecurityConfiguration {
                 .and()
                 .csrf()
                 .disable()
+                .cors()
+                .configurationSource()
+                .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(this::onAuthenticationFailure)
                 .and()
                 .build();
+    }
+
+    private CorsConfigurationSource corsConfigurationSource(){
+        CorsConfiguration cors = new CorsConfiguration();
+        cors.addAllowedOriginPattern('*');
+        cors.setAllowCredentials(true);
+        cors.addAllowedHeader('*');
+        cors.addAllowedMethod("*");
+        cors.addExposedHeader('*');
+        UrlBasedCorsConfigurationSource 
     }
 
     @Bean
