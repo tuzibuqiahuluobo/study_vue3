@@ -16,7 +16,7 @@ export default defineConfig({
   ],
   resolve:{
     alias:{
-      '@':resolvePath("src"),
+      //
     }
   }
 })

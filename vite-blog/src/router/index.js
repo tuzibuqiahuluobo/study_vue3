@@ -14,7 +14,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes:[
         {
-            path: "/",
+            path: "/index",
             name: "Index",
             component: ()=>import('../views/index/Index.vue') ,
             // children:[
@@ -26,7 +26,7 @@ const router = createRouter({
             // ]
         },
         {
-            path:"/Login",
+            path:"/",
             name:"Login",
             component:()=>import('../views/login/Login.vue')
         },

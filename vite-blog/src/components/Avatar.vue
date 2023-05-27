@@ -1,6 +1,5 @@
 <script setup>
-import Login from "../views/login/Login.vue";
-import {useRouter} from "vue-router";
+import router from "../router/index.js";
 //
 import { reactive, toRefs } from 'vue'
 const state = reactive({
@@ -11,10 +10,10 @@ const state = reactive({
 const { circleUrl, } = toRefs(state)
 //
 
-const router = useRouter()
+
 const toViews = () => {
     router.push({
-        path:"/Login"
+        path:"/"
     });
 }
 

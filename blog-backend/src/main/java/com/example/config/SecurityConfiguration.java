@@ -18,9 +18,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
-
+import javax.sql.DataSource;
 import java.io.IOException;
 
 /**
@@ -32,8 +37,12 @@ public class SecurityConfiguration {
 
     @Resource
     AuthorizeService authorizeservice;
+
+    @Resource
+    DataSource dataSource;
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http,PersistentTokenRepository repository) throws Exception {
         return http
                 .authorizeHttpRequests()
                 .anyRequest().authenticated()
@@ -44,12 +53,18 @@ public class SecurityConfiguration {
                 .failureHandler(this::onAuthenticationFailure)
                 .and()
                 .logout()
-                .logoutUrl("/api/auth/logout")
+                .logoutUrl("/api/auth/Sign_out")
+                .logoutSuccessHandler(this::onAuthenticationSuccess )
+                .and()
+                .rememberMe()
+                .rememberMeParameter("remember")
+                .tokenRepository(repository)
+                .tokenValiditySeconds(3600 * 24 * 7)
                 .and()
                 .csrf()
                 .disable()
                 .cors()
-                .configurationSource()
+                .configurationSource(this.corsConfigurationSource())
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(this::onAuthenticationFailure)
@@ -57,14 +72,24 @@ public class SecurityConfiguration {
                 .build();
     }
 
+    @Bean
+    public PersistentTokenRepository tokenRepository(){
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(dataSource);
+        jdbcTokenRepository.setCreateTableOnStartup(false);
+        return jdbcTokenRepository;
+    }
+
     private CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration cors = new CorsConfiguration();
-        cors.addAllowedOriginPattern('*');
+        cors.addAllowedOriginPattern("*");
         cors.setAllowCredentials(true);
-        cors.addAllowedHeader('*');
+        cors.addAllowedHeader("*");
         cors.addAllowedMethod("*");
-        cors.addExposedHeader('*');
-        UrlBasedCorsConfigurationSource 
+        cors.addExposedHeader("*");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", cors);
+        return source;
     }
 
     @Bean
@@ -81,8 +106,11 @@ public class SecurityConfiguration {
     }
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         response.setCharacterEncoding("utf-8");
-        response.getWriter().write(JSONObject.toJSONString(RestBean.success("登录成功")));
-
+        if (request.getRequestURI().endsWith("/login")) {
+            response.getWriter().write(JSONObject.toJSONString(RestBean.success("登录成功")));
+        } else if (request.getRequestURI().endsWith("/Sign_out")) {
+            response.getWriter().write(JSONObject.toJSONString(RestBean.success("退出登录成功")));
+        }
     }
 
 
