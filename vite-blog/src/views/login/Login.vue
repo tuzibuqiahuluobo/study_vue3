@@ -2,9 +2,9 @@
     <div class="login">
       <div class="login_img">
           <div class="login_loginPage">
-              <div class="login_font" style="font-size: 25px ;color: black ;font-weight: bold;text-align: center">登录</div>
-              <div class="login_font" style="font-size: 14px; color: gray ;text-align: center">在进入系统之前请先输入用户名和密码进行登录</div>
-              <div  class="login_input" style="margin-top: 60px; width: 100vw;display: flex;justify-content: center" >
+              <div  style="font-size: 25px ;color: black ;font-weight: bold;text-align: center">登录</div>
+              <div  style="font-size: 14px; color: gray ;text-align: center">在进入系统之前请先输入用户名和密码进行登录</div>
+              <div  style="margin-top: 60px; width: 100vw;display: flex;justify-content: center" >
                 <div style="width: 50vw">
                   <el-input v-model="from.username" type="text" placeholder="用户名/邮箱" size="large">
                       <template #prefix>
@@ -28,7 +28,7 @@
                             <el-checkbox v-model="from.remember" label="记住我" size="large"></el-checkbox>
                         </el-col>
                         <el-col :span="10" style="text-align: center;">
-                            <el-link>忘记密码</el-link>
+                            <el-link @click="router.push('/reset_password')">忘记密码</el-link>
                         </el-col>
                   </el-row>
               </div>
@@ -39,7 +39,7 @@
                   <span style="color: grey">没有账号</span>
               </el-divider>
               <div class="login_button">
-                  <el-button type="warning" plain>注册</el-button>
+                  <el-button @click="router.push('/register')" type="warning" plain>注册账号</el-button>
               </div>
           </div>
       </div>
@@ -71,11 +71,10 @@ const login = ()=>{
             remember:from.remember
         } ,(message)=>{
             ElMessage.success(message)
-            router.push('/Sign_out')
+            router.push('/index')
         })
     }
 }
-
 
 </script>
 

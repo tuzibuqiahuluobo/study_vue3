@@ -11,17 +11,13 @@ const { circleUrl, } = toRefs(state)
 //
 
 
-const toViews = () => {
-    router.push({
-        path:"/"
-    });
-}
+
 
 </script>
 
 <template>
     <div>
-        <el-avatar :size="'large'" :src="circleUrl" @click="toViews" />
+        <el-avatar :size="'large'" :src="circleUrl" @click="router.push('/')" />
     </div>
 </template>
 

@@ -15,7 +15,7 @@
             color: #1989fa;
           "
         >
-          <img src="../../../public/logo_64_eyes.cur" alt="" srcset="">
+          <img src="../public/logo_64_eyes.png" alt="" srcset="">
         </div>
       </el-backtop>
 </template>

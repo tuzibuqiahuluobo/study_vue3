@@ -7,12 +7,8 @@ import Avatar from "../../../components/Avatar.vue";
     <div class="header">
       <div class="header_nav" style="color: #fff">
         <el-menu
-          :default-active="activeIndex"
-          
           class="el-menu-demo"
           mode="horizontal"
-          @select="handleSelect"
-          
         >
           <el-menu-item index="1">Processing Center</el-menu-item>
           <el-sub-menu index="2">

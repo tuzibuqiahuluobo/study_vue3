@@ -28,13 +28,31 @@ const router = createRouter({
         {
             path:"/",
             name:"Login",
-            component:()=>import('../views/login/Login.vue')
+            component:()=>import('../views/login/Login.vue'),
+            // children:[
+            //     {
+            //         path:"/components/register",
+            //         name:"Register",
+            //         component:()=>import('../views/login/components/RegisterPage.vue')
+            //     }
+            // ]
         },
         {
-            path:"/Sign_out",
-            name:"sign_out",
+            path:"/sign_out",
+            name:"Sign_out",
             component:()=>import('../views/login/components/Sign_out.vue')
+        },
+        {
+            path:"/register",
+            name:"Register",
+            component:()=>import('../views/login/components/RegisterPage.vue')
+        },
+        {
+            path:"/reset_password",
+            name:"Reset_password",
+            component:()=>import('../views/login/components/Reset_password.vue')
         }
+
     ]
 })
 
