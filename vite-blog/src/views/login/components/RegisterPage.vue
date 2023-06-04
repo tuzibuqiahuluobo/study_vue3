@@ -59,7 +59,7 @@
                                     </el-input>
                                 </el-col>
                                 <el-col :span="5">
-                                    <el-button type="success" :disabled="!isEmailValid">获取验证码</el-button>
+                                    <el-button type="success" @click="validateEmail" :disabled="!isEmailValid">获取验证码</el-button>
                                 </el-col>
                             </el-row>
                         </el-form-item>
@@ -84,6 +84,7 @@ import {EditPen, Lock, Message, User} from "@element-plus/icons-vue";
 import router from "../../../router/index.js";
 import {reactive, ref} from "vue";
 import {ElMessage} from "element-plus";
+import post from "axios";
 
 const form = reactive({
     username: '',
@@ -154,6 +155,13 @@ const register = ()=>{
     })
 }
 
+const validateEmail = ()=>{
+    post('/api/auth/valid/email',{
+        email:form.email
+    },(message)=>{
+        ElMessage.success(message)
+    })
+}
 
 </script>
 
