@@ -2,12 +2,11 @@ package com.example.controller;
 
 import com.example.entity.RestBean;
 import com.example.service.AuthorizeService;
-import jakarta.annotation.Resource;
 import jakarta.validation.constraints.Pattern;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Ikun
@@ -15,16 +14,26 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin
+@Slf4j
 public class AuthorizeController {
     private final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
-    @Resource
-    AuthorizeService service;
-    @RequestMapping("/valid/email")
-    public RestBean<String> validateEmail(@Pattern(regexp = EMAIL_REGEX ) @RequestParam("email") String email){
+
+    @Autowired
+    private AuthorizeService service;
+
+    @GetMapping("/hello")
+    public String hello(){
+        return "hello";
+    }
+
+    @PostMapping("/valid/email")
+    public RestBean<String> validateEmail(@RequestParam("email") String email){
+        log.error(email);
         if (service.sendValidateEmail(email)){
             return RestBean.success("邮件已发送，请注意查收");
         }else {
-            return RestBean.failure(400,"邮件发送失败，请联系管理员");
+            return RestBean.failure(10010,"邮件发送失败，请联系管理员");
         }
     }
 

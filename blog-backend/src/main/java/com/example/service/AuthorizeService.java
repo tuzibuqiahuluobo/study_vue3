@@ -1,10 +1,9 @@
 package com.example.service;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * @author Ikun
  */
-public interface AuthorizeService extends UserDetailsService {
+public interface AuthorizeService {
     boolean sendValidateEmail(String email);
 }

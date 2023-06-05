@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -27,21 +24,21 @@ public class AuthorizeServiceImpl implements AuthorizeService {
     UserMapper mapper;
     @Resource
     MailSender mailSender;
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (username == null) {
-            throw new UsernameNotFoundException("用户名不能为空");
-        }
-        Account account = mapper.findAccountByNameOrEmail(username);
-        if (account == null) {
-            throw new UsernameNotFoundException("用户名或密码错误");
-        }
-        return User
-                .withUsername(account.getUsername())
-                .password(account.getPassword())
-                .roles("user")
-                .build();
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        if (username == null) {
+//            throw new UsernameNotFoundException("用户名不能为空");
+//        }
+//        Account account = mapper.findAccountByNameOrEmail(username);
+//        if (account == null) {
+//            throw new UsernameNotFoundException("用户名或密码错误");
+//        }
+//        return User
+//                .withUsername(account.getUsername())
+//                .password(account.getPassword())
+//                .roles("user")
+//                .build();
+//    }
 
     /**
           1.先生成对应的验证码

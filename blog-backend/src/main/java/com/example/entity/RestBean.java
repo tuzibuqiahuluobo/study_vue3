@@ -15,7 +15,7 @@ public class RestBean<T> {
     }
 
     public static <T> RestBean<T> success() {
-        return new RestBean<>(200,true, null);
+        return new RestBean<T>(200,true, null);
     }
 
     public static <T> RestBean<T> success(T data) {
