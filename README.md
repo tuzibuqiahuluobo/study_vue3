@@ -22,3 +22,4 @@
 
 ##注意##
 * 遇到“OpenSSL SSL_read: Connection was reset, errno 10054”问题时在最外层的目录的终端中输入 git config --global http.sslVerify "false"
+* 克隆后打开Navicat Premium在项目复制SQL中的SQL文件，然后新建一个数据库，名为blog-project,在这个数据库里新建查询，复制sql语句运行
