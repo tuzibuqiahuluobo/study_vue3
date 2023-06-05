@@ -1,15 +1,15 @@
-//package com.example.config;
-//
-//
-//import com.alibaba.fastjson.JSONObject;
-//import com.example.entity.RestBean;
-//
-//import com.example.service.AuthorizeService;
-//import jakarta.annotation.Resource;
-//import jakarta.servlet.http.HttpServletRequest;
-//import jakarta.servlet.http.HttpServletResponse;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
+package com.example.config;
+
+
+import com.alibaba.fastjson.JSONObject;
+import com.example.entity.RestBean;
+
+import com.example.service.AuthorizeService;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.authentication.AuthenticationManager;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 //import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,27 +20,27 @@
 //import org.springframework.security.web.SecurityFilterChain;
 //import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 //import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-//import org.springframework.web.cors.CorsConfiguration;
-//import org.springframework.web.cors.CorsConfigurationSource;
-//import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-//
-//
-//import javax.sql.DataSource;
-//import java.io.IOException;
-//
-///**
-// * @author Ikun
-// */
-//@Configuration
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+
+import javax.sql.DataSource;
+import java.io.IOException;
+
+/**
+ * @author Ikun
+ */
+@Configuration
 //@EnableWebSecurity
-//public class SecurityConfiguration {
-//
-//    @Resource
-//    AuthorizeService authorizeservice;
-//
-//    @Resource
-//    DataSource dataSource;
-//
+public class SecurityConfiguration {
+
+    @Resource
+    AuthorizeService authorizeservice;
+
+    @Resource
+    DataSource dataSource;
+
 //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http,PersistentTokenRepository repository) throws Exception {
 //        return http
@@ -80,19 +80,19 @@
 //        jdbcTokenRepository.setCreateTableOnStartup(false);
 //        return jdbcTokenRepository;
 //    }
-//
-//    private CorsConfigurationSource corsConfigurationSource(){
-//        CorsConfiguration cors = new CorsConfiguration();
-//        cors.addAllowedOriginPattern("*");
-//        cors.setAllowCredentials(true);
-//        cors.addAllowedHeader("*");
-//        cors.addAllowedMethod("*");
-//        cors.addExposedHeader("*");
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", cors);
-//        return source;
-//    }
-//
+
+    private CorsConfigurationSource corsConfigurationSource(){
+        CorsConfiguration cors = new CorsConfiguration();
+        cors.addAllowedOriginPattern("*");
+        cors.setAllowCredentials(true);
+        cors.addAllowedHeader("*");
+        cors.addAllowedMethod("*");
+        cors.addExposedHeader("*");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", cors);
+        return source;
+    }
+
 //    @Bean
 //    public AuthenticationManager authenticationManager(HttpSecurity security) throws Exception {
 //        return security
@@ -120,5 +120,5 @@
 //        response.setCharacterEncoding("utf-8");
 //        response.getWriter().write(JSONObject.toJSONString(RestBean.failure(401,exception.getMessage())));
 //    }
-//
-//}
+
+}

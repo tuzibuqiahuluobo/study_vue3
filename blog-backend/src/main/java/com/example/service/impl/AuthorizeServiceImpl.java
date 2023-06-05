@@ -1,6 +1,7 @@
 package com.example.service.impl;
 
 import com.example.entity.Account;
+import com.example.entity.User;
 import com.example.mapper.UserMapper;
 import com.example.service.AuthorizeService;
 import jakarta.annotation.Resource;
@@ -39,6 +40,10 @@ public class AuthorizeServiceImpl implements AuthorizeService {
 //                .roles("user")
 //                .build();
 //    }
+
+    public User findUserByUsername(String username){
+        return mapper.findUserByUsername(username);
+    }
 
     /**
           1.先生成对应的验证码
