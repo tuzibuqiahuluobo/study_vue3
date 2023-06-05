@@ -13,7 +13,7 @@
 
 <script setup>
 import {ref, reactive} from "vue";
-import 'vue3-video-play/dist/style.css'
+import { VideoPlayer } from '@videojs-player/react'
 
 const videoPlayer = ref();
 
