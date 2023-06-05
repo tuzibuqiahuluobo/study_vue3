@@ -84,7 +84,7 @@ import {EditPen, Lock, Message, User} from "@element-plus/icons-vue";
 import router from "../../../router/index.js";
 import {reactive, ref} from "vue";
 import {ElMessage} from "element-plus";
-import post from "axios";
+import {post} from "../../../net/index.js"
 
 const form = reactive({
     username: '',
@@ -156,11 +156,17 @@ const register = ()=>{
 }
 
 const validateEmail = ()=>{
-    post('/api/auth/valid/email',{
+  post("/api/auth/valid/email", {
         email:form.email
-    },(message)=>{
+      }, (message)=>{
         ElMessage.success(message)
-    })
+      })
+
+    // post('/api/auth/valid/email',{
+    //     email:form.email
+    // },(message)=>{
+    //     ElMessage.success(message)
+    // })
 }
 
 </script>

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin
-@Slf4j
 public class AuthorizeController {
     private final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
 
@@ -29,7 +28,6 @@ public class AuthorizeController {
 
     @PostMapping("/valid/email")
     public RestBean<String> validateEmail(@RequestParam("email") String email){
-        log.error(email);
         if (service.sendValidateEmail(email)){
             return RestBean.success("邮件已发送，请注意查收");
         }else {

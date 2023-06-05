@@ -9,7 +9,6 @@ function post(url,data,success,failure = defaultFailure,error = defaultError) {
         headers:{
             'Content-Type':'application/x-www-form-urlencoded'
         },
-        withCredentials:true
     }).then(({data}) => {
         if(data.success)
             success(data.message,data.status)
