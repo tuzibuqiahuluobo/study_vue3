@@ -9,7 +9,7 @@
                 <div style="width: 50vw">
                     <el-form :model="form" :rules="rules" @validate="onValidate" ref="formRef">
                         <el-form-item prop="username">
-                            <el-input v-model="form.username" type="text" placeholder="用户名" size="large">
+                            <el-input v-model="form.username" type="text" :maxlength="8" placeholder="用户名" size="large">
                                 <template #prefix>
                                     <el-icon>
                                         <User/>
@@ -18,7 +18,7 @@
                             </el-input>
                         </el-form-item>
                         <el-form-item prop="password">
-                            <el-input v-model="form.password" type="password" placeholder="密码" show-password
+                            <el-input v-model="form.password" type="password" :maxlength="16" placeholder="密码" show-password
                                       size="large">
                                 <template #prefix>
                                     <el-icon>
@@ -28,7 +28,7 @@
                             </el-input>
                         </el-form-item>
                         <el-form-item prop="password_repeat">
-                            <el-input v-model="form.password_repeat" type="password" placeholder="重复密码"
+                            <el-input v-model="form.password_repeat" type="password" :maxlength="16" placeholder="重复密码"
                                       show-password
                                       size="large">
                                 <template #prefix>
@@ -50,7 +50,7 @@
                         <el-form-item prop="code">
                             <el-row style="justify-content: space-between;">
                                 <el-col :span="17">
-                                    <el-input v-model="form.code" type="text" placeholder="请输入验证码" size="large">
+                                    <el-input v-model="form.code" type="text" :maxlength="6" placeholder="请输入验证码" size="large">
                                         <template #prefix>
                                             <el-icon>
                                                 <EditPen/>
@@ -148,7 +148,16 @@ const onValidate = (prop,isValid)=> {
 const register = ()=>{
     formRef.value.validate((isValid)=>{
         if (isValid){
-
+            post('/api/auth/register',{
+                username: form.username,
+                password:form.password,
+                password_repeat: form.password_repeat,
+                email: form.email,
+                code: form.code
+            },(message)=>{
+                ElMessage.success(message)
+                router.push('/')
+            })
         }else {
             ElMessage.warning('请完整填写注册内容')
         }

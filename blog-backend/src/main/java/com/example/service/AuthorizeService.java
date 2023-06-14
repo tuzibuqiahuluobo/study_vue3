@@ -14,6 +14,9 @@ public interface AuthorizeService {
      * @return 用户模型
      */
     User findUserByUsername(String username);
+    User findUserByEmail(String email);
 
     boolean sendValidateEmail(String email);
+
+    int saveUser(User newUser);
 }
