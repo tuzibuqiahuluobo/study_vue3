@@ -170,12 +170,6 @@ const validateEmail = ()=>{
       }, (message)=>{
         ElMessage.success(message)
       })
-
-    // post('/api/auth/valid/email',{
-    //     email:form.email
-    // },(message)=>{
-    //     ElMessage.success(message)
-    // })
 }
 
 </script>
