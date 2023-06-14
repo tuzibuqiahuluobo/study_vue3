@@ -9,7 +9,8 @@
                 <div style="width: 50vw">
                     <el-form :model="form" :rules="rules" @validate="onValidate" ref="formRef">
                         <el-form-item prop="username">
-                            <el-input v-model="form.username" type="text" :maxlength="8" placeholder="用户名" size="large">
+                            <el-input v-model="form.username" type="text" :maxlength="8" placeholder="用户名"
+                                      size="large">
                                 <template #prefix>
                                     <el-icon>
                                         <User/>
@@ -18,7 +19,8 @@
                             </el-input>
                         </el-form-item>
                         <el-form-item prop="password">
-                            <el-input v-model="form.password" type="password" :maxlength="16" placeholder="密码" show-password
+                            <el-input v-model="form.password" type="password" :maxlength="16" placeholder="密码"
+                                      show-password
                                       size="large">
                                 <template #prefix>
                                     <el-icon>
@@ -28,7 +30,8 @@
                             </el-input>
                         </el-form-item>
                         <el-form-item prop="password_repeat">
-                            <el-input v-model="form.password_repeat" type="password" :maxlength="16" placeholder="重复密码"
+                            <el-input v-model="form.password_repeat" type="password" :maxlength="16"
+                                      placeholder="重复密码"
                                       show-password
                                       size="large">
                                 <template #prefix>
@@ -50,7 +53,8 @@
                         <el-form-item prop="code">
                             <el-row style="justify-content: space-between;">
                                 <el-col :span="17">
-                                    <el-input v-model="form.code" type="text" :maxlength="6" placeholder="请输入验证码" size="large">
+                                    <el-input v-model="form.code" type="text" :maxlength="6" placeholder="请输入验证码"
+                                              size="large">
                                         <template #prefix>
                                             <el-icon>
                                                 <EditPen/>
@@ -59,7 +63,10 @@
                                     </el-input>
                                 </el-col>
                                 <el-col :span="5">
-                                    <el-button type="success" @click="validateEmail" :disabled="!isEmailValid">获取验证码</el-button>
+                                    <el-button type="success" @click="validateEmail" :disabled="!isEmailValid"
+                                               :loding="isSending">
+                                        {{ getCode }}
+                                    </el-button>
                                 </el-col>
                             </el-row>
                         </el-form-item>
@@ -71,7 +78,8 @@
                     <el-button type="success" @click="register()">立即注册</el-button>
                 </div>
             </div>
-            <div style="margin-top: 20px; font-size: 14px;line-height: 15px;width: 100vw;display: flex;justify-content: center">
+            <div
+                    style="margin-top: 20px; font-size: 14px;line-height: 15px;width: 100vw;display: flex;justify-content: center">
                 已有账号？
                 <el-link type="primary" @click="router.push('/')">立即登录</el-link>
             </div>
@@ -139,38 +147,60 @@ const rules = {
 const formRef = ref()
 const isEmailValid = ref(false)
 
-const onValidate = (prop,isValid)=> {
-    if (prop === 'email'){
+const onValidate = (prop, isValid) => {
+    if (prop === 'email') {
         isEmailValid.value = isValid
     }
 }
 
-const register = ()=>{
-    formRef.value.validate((isValid)=>{
-        if (isValid){
-            post('/api/auth/register',{
+const register = () => {
+    formRef.value.validate((isValid) => {
+        if (isValid) {
+            post('/api/auth/register', {
                 username: form.username,
-                password:form.password,
+                password: form.password,
                 password_repeat: form.password_repeat,
                 email: form.email,
                 code: form.code
-            },(message)=>{
+            }, (message) => {
                 ElMessage.success(message)
                 router.push('/')
             })
-        }else {
+        } else {
             ElMessage.warning('请完整填写注册内容')
         }
     })
 }
 
-const validateEmail = ()=>{
-  post("/api/auth/valid/email", {
-        email:form.email
-      }, (message)=>{
+const validateEmail = () => {
+    // 按钮进入倒计时，防止用户频繁点击
+    const timer = setInterval(() => {
+        if (getCode.value === "获取验证码") {
+            getCode.value = "59s";
+            isEmailValid.value = true;
+        } else if (getCode.value === "1s") {
+            getCode.value = "获取验证码";
+            isEmailValid.value = false;
+            clearInterval(timer);
+        } else {
+            getCode.value = parseInt(getCode.value) - 1 + "s";
+        }
+    }, 1000);
+    post("/api/auth/valid/email", {
+        email: form.email
+    }, (message) => {
         ElMessage.success(message)
-      })
+    })
 }
+
+
+// 获取验证码按钮的文字
+const getCode = ref("获取验证码")
+// 是否正在发送验证码
+const isSending = ref(false)
+// 发送验证码结束
+isSending.value = false;
+
 
 </script>
 
