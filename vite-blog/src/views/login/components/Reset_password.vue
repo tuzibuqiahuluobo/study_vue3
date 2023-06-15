@@ -154,7 +154,6 @@ const rules = {
     ]
 }
 
-
 const resetEmail = () => {
     resetEmail()
 }
