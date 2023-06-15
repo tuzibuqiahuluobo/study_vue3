@@ -58,15 +58,24 @@ public class AuthorizeServiceImpl implements AuthorizeService {
      */
     @Override
     public boolean sendValidateEmail(String email) {
-        Random random = new Random();
-        int code = random.nextInt(899999) + 100000;
+        String realCode = mapper.findEmailCode(email);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(email);
         message.setSubject("您的验证邮件");
+
+        if (realCode != null){
+            message.setText("验证码：" + realCode);
+            mailSender.send(message);
+            return true;
+        }
+
+        Random random = new Random();
+        int code = random.nextInt(899999) + 100000;
         message.setText("验证码：" + code);
         try {
             mailSender.send(message);
+            mapper.saveEmailCode(email, String.valueOf(code));
             return true;
         } catch (MailException e) {
             e.printStackTrace();
@@ -78,4 +87,26 @@ public class AuthorizeServiceImpl implements AuthorizeService {
     public int saveUser(User newUser) {
         return mapper.saveUser(newUser);
     }
+
+    @Override
+    public int updateUser(User user) {
+        return mapper.updateUser(user);
+    }
+
+    @Override
+    public int saveEmailCode(String email, String code) {
+        return mapper.saveEmailCode(email, code);
+    }
+
+    @Override
+    public String findEmailCode(String email) {
+        return mapper.findEmailCode(email);
+    }
+
+    @Override
+    public int deleteEmailCode(String email) {
+        return mapper.deleteEmailCode(email);
+    }
+
+
 }

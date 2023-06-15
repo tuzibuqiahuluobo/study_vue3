@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.DigestUtils;
@@ -88,6 +89,31 @@ public class AuthorizeController {
         }
     }
 
+    @PutMapping("/resetPassword")
+    public RestBean<String> resetPassword(@RequestParam("username") String username,
+                                          @RequestParam("password") String password,
+                                          @RequestParam("email") String email,
+                                          @RequestParam("code") String code) {
+        User resetUser = service.findUserByUsername(username);
+        User resetEmail = service.findUserByEmail(email);
+        if (resetUser == null) {
+            return RestBean.failure(782, "用户不存在");
+        } else if (resetEmail == null) {
+            return RestBean.failure(783, "邮箱不存在");
+        } else {
+            if (code != service.findEmailCode(email)){
+                return RestBean.failure(784, "验证码不正确");
+            }
+            service.deleteEmailCode(email);
+            resetUser.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
+            int result = service.updateUser(resetUser);
+            if (result != 0){
+                return RestBean.success("更新成功");
+            }else {
+                return RestBean.failure(785,"更新失败");
+            }
+        }
+    }
 
 
 

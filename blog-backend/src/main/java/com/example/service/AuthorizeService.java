@@ -19,4 +19,12 @@ public interface AuthorizeService {
     boolean sendValidateEmail(String email);
 
     int saveUser(User newUser);
+
+    int updateUser(User user);
+
+    int saveEmailCode(String email, String code);
+
+    String findEmailCode(String email);
+
+    int deleteEmailCode(String email);
 }

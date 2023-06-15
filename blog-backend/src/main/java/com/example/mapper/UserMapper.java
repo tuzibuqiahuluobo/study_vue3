@@ -2,10 +2,7 @@ package com.example.mapper;
 
 import com.example.entity.Account;
 import com.example.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 /**
  * @author Ikun
@@ -26,5 +23,15 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true,keyProperty = "id",keyColumn = "id")
     int saveUser(User user);
 
+    @Update("update db_account set username = #{username}, password = #{password}, email = #{email} where id = #{id}")
+    int updateUser(User user);
 
+    @Select("select code from email_code where email = #{email}")
+    String findEmailCode(String email);
+
+    @Select("insert into email_code values(#{email}, #{code})")
+    int saveEmailCode(String email, String code);
+
+    @Delete("delete from email_code where email = #{email}")
+    int deleteEmailCode(String email);
 }
