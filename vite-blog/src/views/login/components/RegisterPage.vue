@@ -172,33 +172,68 @@ const register = () => {
     })
 }
 
+// const validateEmail = () => {
+//     if(isSending.value){
+//         return;//如果正在发送验证码，则不执行后续逻辑
+//     }
+//     isSending.value=true//标记正在发送验证码
+//
+//     post("/api/auth/valid/email", {
+//         email: form.email
+//     }, (message) => {
+//         ElMessage.success(message)
+//         startCountdown() //获取验证码成功后开始倒计时
+//     })
+//
+//     // // 按钮进入倒计时，防止用户频繁点击
+//     // const timer = setInterval(() => {
+//     //     if (getCode.value === "获取验证码") {
+//     //         getCode.value = "59s";
+//     //         isEmailValid.value = true;
+//     //     } else if (getCode.value === "1s") {
+//     //         getCode.value = "获取验证码";
+//     //         isEmailValid.value = false;
+//     //         clearInterval(timer);
+//     //     } else {
+//     //         getCode.value = parseInt(getCode.value) - 1 + "s";
+//     //     }
+//     // }, 1000);
+//
+// }
+
+
 const validateEmail = () => {
-    // 按钮进入倒计时，防止用户频繁点击
+    const countdown = ref(59);
+    const isEmailValid = ref(true);
+
+    if (isEmailValid.value) {
+        return; // 防止多次点击
+    }
+
+    isEmailValid.value = false;
+    getCode.value = `${countdown.value}s`;
+
     const timer = setInterval(() => {
-        if (getCode.value === "获取验证码") {
-            getCode.value = "59s";
-            isEmailValid.value = true;
-        } else if (getCode.value === "1s") {
-            getCode.value = "获取验证码";
+        countdown.value--;
+
+        if (countdown.value === 0) {
+            getCode.value = '获取验证码';
             isEmailValid.value = false;
             clearInterval(timer);
         } else {
-            getCode.value = parseInt(getCode.value) - 1 + "s";
+            getCode.value = `${countdown.value}s`;
         }
     }, 1000);
-    post("/api/auth/valid/email", {
+
+    post('/api/auth/valid/email', {
         email: form.email
     }, (message) => {
-        ElMessage.success(message)
-    })
-}
+        ElMessage.success(message);
+    });
+};
 
-
-// 获取验证码按钮的文字
-const getCode = ref("获取验证码")
-// 是否正在发送验证码
-const isSending = ref(false)
-// 发送验证码结束
+const getCode = ref('获取验证码');
+const isSending = ref(false);
 isSending.value = false;
 
 
