@@ -11,7 +11,7 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 04/06/2023 23:52:16
+ Date: 15/06/2023 12:56:44
 */
 
 SET NAMES utf8mb4;
@@ -29,12 +29,12 @@ CREATE TABLE `db_account`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `unique_name`(`username` ASC) USING BTREE,
   UNIQUE INDEX `unique_email`(`email` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of db_account
 -- ----------------------------
-INSERT INTO `db_account` VALUES (1, NULL, 'user', '$2a$10$BdWIxVLBgIsOHDHYCIG4uOBvHe8Po1a0helDdaa36OGOfwVMMXbcO');
+INSERT INTO `db_account` VALUES (1, '2672172829@qq.com', 'user', '$2a$10$BdWIxVLBgIsOHDHYCIG4uOBvHe8Po1a0helDdaa36OGOfwVMMXbcO');
 
 -- ----------------------------
 -- Table structure for persistent_logins
@@ -51,7 +51,5 @@ CREATE TABLE `persistent_logins`  (
 -- ----------------------------
 -- Records of persistent_logins
 -- ----------------------------
-INSERT INTO `persistent_logins` VALUES ('user', 'c7e4KrZ2QWuF2501SeGusA==', 'fRa27wxa724r7vSN6t86Sg==', '2023-05-26 16:04:40');
-INSERT INTO `persistent_logins` VALUES ('user', 'l6nezMQcfagoduq3LQC0sw==', 'eJg/1HW/aMzj94wRZ/Z09w==', '2023-05-26 16:03:35');
 
 SET FOREIGN_KEY_CHECKS = 1;
